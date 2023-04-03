@@ -78,11 +78,11 @@ public class KhachHang {
         this.ngaySinh = DungChung.f.parse(DungChung.sc.nextLine());
         System.out.print("CCCD: ");
         this.CCCD = DungChung.sc.nextLine();
-        System.out.print("So tien gui: ");
+        System.out.print("So tien gui (>50000VND): ");
         this.soTienGui = Double.parseDouble(DungChung.sc.nextLine());
         do {            
             if(soTienGui < 50000){
-                System.out.printf("So tien gui > 50000VND: ");
+                System.out.printf("Vui long nhap lai!: ");
                 this.soTienGui = Double.parseDouble(DungChung.sc.nextLine());
             }
         } while (soTienGui < 50000);

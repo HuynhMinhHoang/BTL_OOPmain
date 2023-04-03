@@ -46,7 +46,14 @@ public class demo {
                     qkKH.xuatDSKH();
                     break;
                 }//cs2
-
+                
+                case 3:{
+                    DungChung.sc.nextLine();
+                    System.out.print("Nhap STK: ");
+                    String stk = DungChung.sc.nextLine();
+                    qkKH.tinhLaiTheoSTK(stk);
+                }//cs3
+                
                 case 4: {
                     int chon2;
                     System.out.println("=== TIM KIEM ===");

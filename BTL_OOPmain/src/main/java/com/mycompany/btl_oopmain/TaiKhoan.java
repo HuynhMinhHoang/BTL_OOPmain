@@ -13,13 +13,16 @@ import java.util.List;
  * @author Huỳnh Minh Hoàng
  */
 public class TaiKhoan extends Account {
-
     private List<TaiKhoanCoKyHan> dsTKKH = new ArrayList<>();
 
 
+//    public TaiKhoan(double soTien){
+//        this.setSoDu(soTien);
+//        this.setLoaiTK("TAI KHOAN KHONG KY HAN");
+//    }
+
     public TaiKhoan(double soTien){
-        this.setSoDu(soTien);
-        this.setLoaiTK("TAI KHOAN KHONG KY HAN");
+        super(soTien, "TAI KHOAN KHONG KY HAN");
     }
     
     public void themTKKH(TaiKhoanCoKyHan... tkkh) {

@@ -12,23 +12,27 @@ import java.util.GregorianCalendar;
  * @author Huỳnh Minh Hoàng
  */
 public class TaiKhoanCoKyHan extends Account {
-
     private Calendar ngayDaoHan;
     private KyHan kyHan;
 
-    public TaiKhoanCoKyHan(Calendar ngayDaoHan, KyHan kyHan, double soDu, String loaiTK) {
-        this.ngayDaoHan = this.kyHan.tinhDaoHan(new GregorianCalendar());
-        this.kyHan = kyHan;
-        this.setLoaiTK("TAI KHOAN CO KY HAN");
-    }
 
 //    public TaiKhoanCoKyHan(KyHan kyHan, double st) {
 //        this.setSoDu(st);
+//        this.setLoaiTK();
 //        this.kyHan = kyHan;
 //        this.ngayDaoHan = this.kyHan.tinhDaoHan(new GregorianCalendar());
-//        this.setLoaiTK("Tài khoản kỳ hạn");
 //    }
 
+    public TaiKhoanCoKyHan(KyHan kyHan, double st) {
+        super(st, "TAI KHOAN CO KY HAN");
+        this.ngayDaoHan = this.kyHan.tinhDaoHan(new GregorianCalendar());
+        this.kyHan = kyHan;
+    }
+
+    
+
+    
+    
     @Override
     public double tinhTienLai() {
         return this.kyHan.tinhTienLai(this.soDu);

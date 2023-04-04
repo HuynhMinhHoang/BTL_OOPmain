@@ -72,10 +72,10 @@ public class KhachHang {
         this.hoTen = DungChung.sc.nextLine();;
         System.out.print("Gioi tinh: ");
         this.gioiTinh = DungChung.sc.nextLine();
+        System.out.print("Ngay sinh: ");
+        this.ngaySinh = DungChung.f.parse(DungChung.sc.nextLine());
         System.out.print("Que quan: ");
         this.queQuan = DungChung.sc.nextLine();
-        System.out.print("Ngay sinh(dd/MM/yyyy): ");
-        this.ngaySinh = DungChung.f.parse(DungChung.sc.nextLine());
         System.out.print("CCCD: ");
         this.CCCD = DungChung.sc.nextLine();
         System.out.print("So tien gui (>50000VND): ");

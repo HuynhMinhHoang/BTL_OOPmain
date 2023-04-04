@@ -4,9 +4,7 @@
  */
 package com.mycompany.btl_oopmain;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 /**
@@ -14,7 +12,6 @@ import java.util.GregorianCalendar;
  * @author Huỳnh Minh Hoàng
  */
 public abstract class Account {
-    
     protected int matKhau;
     protected double soDu;
     protected String loaiTK;
@@ -26,7 +23,13 @@ public abstract class Account {
         ngayTaoTK = new GregorianCalendar();
     }
 
+    public Account(double soDu, String loaiTK) {
+        this.soDu = soDu;
+        this.loaiTK = loaiTK;
+    }
 
+    
+    
     public void hienThiTK() {
         System.out.printf("Loai TK: %s\n", this.loaiTK);
         System.out.printf("So du: %.0f\n", this.soDu);

@@ -27,14 +27,9 @@ public class QuanLyKhachHang {
         this.dsKH.forEach(KhachHang::hienThiKH);
     }
 
-    //tim kiem STK
-    public KhachHang timSTK(String stk) {
-        return this.dsKH.stream().filter(h -> h.getMaSoKH().equals(stk)).findFirst().get();
-    }
-
     //tinh lai suat theo STK
     public void tinhLaiTheoSTK(String stk) {
-        KhachHang kh = timSTK(stk);
+        KhachHang kh = this.dsKH.stream().filter(h -> h.getMaSoKH().equals(stk)).findFirst().get();
         for (Account ac : kh.getDsAC()) {
             ac.hienThiTK();
             System.out.printf("Tien lai = %.0fVND\n", ac.tinhTienLai());
@@ -43,17 +38,35 @@ public class QuanLyKhachHang {
 
 //    tim KH theo Ten
     public KhachHang timKHTheoTen(String ht) {
-        return this.dsKH.stream().filter(t -> t.getHoTen().equalsIgnoreCase(ht)).findFirst().get();
+//        return this.dsKH.stream().filter(t -> t.getHoTen().equalsIgnoreCase(ht)).findFirst().get();
+        for (KhachHang kh : dsKH) {
+            if (kh.getHoTen().equals(ht)) {
+                return kh;
+            }
+        }
+        return null;
     }
 
     //tim KH theo STK
     public KhachHang timKHTheoSTK(String stk) {
-        return this.dsKH.stream().filter(t -> t.getMaSoKH().equalsIgnoreCase(stk)).findFirst().get();
+//        return this.dsKH.stream().filter(t -> t.getMaSoKH().equalsIgnoreCase(stk)).findFirst().get();
+        for (KhachHang kh : dsKH) {
+            if (kh.getMaSoKH().equals(stk)) {
+                return kh;
+            }
+        }
+        return null;
     }
 
     //hien thi danh sach tai khoan cua KH dang co
     public KhachHang timDSTKKH(String stk) {
-        return this.dsKH.stream().filter(t -> t.getMaSoKH().equals(stk)).findFirst().get();
+//        return this.dsKH.stream().filter(t -> t.getMaSoKH().equals(stk)).findFirst().get();
+        for (KhachHang kh : dsKH) {
+            if (kh.getMaSoKH().equals(stk)) {
+                return kh;
+            }
+        }
+        return null;
     }
 
     //sap xep
@@ -74,10 +87,10 @@ public class QuanLyKhachHang {
 //            return null;
 //    }
     public KhachHang dangNhap(String username, int password) {
-        for (KhachHang i : dsKH) {
-            if (i.getUsername().equals(username)) {
-                if (i.getDsAC().get(0).getMatKhau() == password) {
-                    return i;
+        for (KhachHang kh : dsKH) {
+            if (kh.getUsername().equals(username)) {
+                if (kh.getDsAC().get(0).getMatKhau() == password) {
+                    return kh;
                 } else {
                     return null;
                 }

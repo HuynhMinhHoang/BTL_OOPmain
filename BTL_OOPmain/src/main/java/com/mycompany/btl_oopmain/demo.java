@@ -13,11 +13,11 @@ import java.text.ParseException;
 public class demo {
 
     public static void main(String[] args) throws ParseException {
-        int chon1;
-        boolean flag = true;
+        boolean f = true;
+        int chon1 = 0;
         QuanLyKhachHang qkKH = new QuanLyKhachHang();
 
-        do {
+        while (f) {
             System.out.println("*********** MENU ***********");
             System.out.print("1. Nhap thong tin khach hang\n"
                     + "2. Xuat thong tin Khach Hang\n"
@@ -30,7 +30,7 @@ public class demo {
             chon1 = DungChung.sc.nextInt();
             switch (chon1) {
                 case 1: {
-                    System.out.print("==== NHAP THONG TIN KHACH HANG ==== \n");
+                    System.out.print("\n==== NHAP THONG TIN KHACH HANG ==== \n");
                     KhachHang kh = new KhachHang();
                     kh.nhapKH();
                     Account acc = new TaiKhoan(kh.getSoTienGui());
@@ -41,7 +41,7 @@ public class demo {
                 }//cs1
 
                 case 2: {
-                    System.out.println("==== DANH SACH THONG TIN KHACH HANG ====");
+                    System.out.println("\n==== DANH SACH THONG TIN KHACH HANG ====");
                     qkKH.xuatDSKH();
                     break;
                 }//cs2
@@ -50,13 +50,14 @@ public class demo {
                     DungChung.sc.nextLine();
                     System.out.print("Nhap STK: ");
                     String stk = DungChung.sc.nextLine();
+
                     qkKH.tinhLaiTheoSTK(stk);
                     break;
                 }//cs3
 
                 case 4: {
                     int chon2;
-                    System.out.println("=== TIM KIEM ===");
+                    System.out.println("\n=== TIM KIEM ===");
                     System.out.print("1. Tim kiem Khach Hang theo Ho & ten\n"
                             + "2. Tim kiem Khach Hang theo STK Khach Hang\n"
                             + "3. Tim kiem danh sach tai khoan cua Khach Hang\n"
@@ -66,37 +67,56 @@ public class demo {
                     switch (chon2) {
                         case 1: {
                             DungChung.sc.nextLine();
-                            System.out.print("Nhap ten Khach Hang can tim kiem: ");
+                            System.out.print("Nhap ho va ten Khach Hang can tim kiem: ");
                             String s = DungChung.sc.nextLine();
                             KhachHang kh = qkKH.timKHTheoTen(s);
 
-                            System.out.println("==== THONG TIN KHACH HANG THEO TEN ====");
-                            kh.hienThiKH();
-
+                            if (kh != null) {
+                                System.out.println("\n==== THONG TIN KHACH HANG THEO HO&TEN ====");
+                                kh.hienThiKH();
+                            } else {
+                                System.out.println("Khong tim thay khach hang nao!");
+                            }
+                            break;
                         }
                         case 2: {
                             DungChung.sc.nextLine();
                             System.out.print("Nhap ma so Khach Hang can tim kiem: ");
                             String s = DungChung.sc.nextLine();
                             KhachHang kh = qkKH.timKHTheoSTK(s);
-                            System.out.println("==== THONG TIN KHACH HANG THEO STK ====");
-                            kh.hienThiKH();
+
+                            if (kh != null) {
+                                System.out.println("\n==== THONG TIN KHACH HANG THEO STK ====");
+                                kh.hienThiKH();
+                            } else {
+                                System.out.println("Khong tim thay khach hang nao!");
+                            }
+                            break;
                         }
                         case 3: {
                             DungChung.sc.nextLine();
                             System.out.print("Nhap ma so Khach Hang can tim kiem: ");
                             String s = DungChung.sc.nextLine();
                             KhachHang kh = qkKH.timDSTKKH(s);
-                            System.out.println("==== THONG TIN DS KHACH HANG THEO STK ====");
-                            kh.xuatAccount();
-                        }
 
-                    }//sw2                           
+                            if (kh != null) {
+                                System.out.println("\n==== THONG TIN DS TAI KHOAN CUA KHACH HANG THEO STK ====");
+                                kh.xuatAccount();
+                            } else {
+                                System.out.println("Khong tim thay khach hang nao!");
+                            }
+                            break;
+                        }
+                        case 4: {
+                            break;
+                        }
+                    }//sw2                   
+                    break;
                 }//cs4
 
                 case 5: {
                     qkKH.sapXepKH();
-                    System.out.println("===== SAP XEP KHACH HANG =====");
+                    System.out.println("\n===== SAP XEP KHACH HANG =====");
                     qkKH.xuatDSKH();
                     break;
                 }//cs5
@@ -104,7 +124,7 @@ public class demo {
                     KhachHang kh;
                     String username;
                     int password;
-                    
+
                     DungChung.sc.nextLine();
                     System.out.print("Username: ");
                     username = DungChung.sc.nextLine();
@@ -120,7 +140,7 @@ public class demo {
 
                     int chon3;
                     do {
-                        System.out.printf(" === MENU KHACH HANG === \n*STK: %s\n*Ho & ten: %s\n", kh.getMaSoKH(), kh.getHoTen());
+                        System.out.printf("\n=== MENU KHACH HANG ===\n*STK: %s\n*Ho & ten: %s\n", kh.getMaSoKH(), kh.getHoTen());
                         System.out.print("1. Mo Tai Khoan Co Ky Han\n"
                                 + "2. Nop tien\n"
                                 + "3. Rut tien\n"
@@ -129,17 +149,29 @@ public class demo {
                                 + "6. Thoat!\n"
                                 + "Ban chon?: ");
                         chon3 = DungChung.sc.nextInt();
-                    } while (true);
+
+                        switch (chon3) {
+                            case 6: {
+                            }
+                            
+                            
+                            
+                            
+                        }//sw3
+                    } while (chon3 < 6);
 
                 }//cs6
                 case 7: {
                     System.out.println("Tam biet!");
-                    return;
+                    f = false;
+                    break;
+                }
+                default: {
+                    System.out.println("Vui long nhap lai!!");
                 }
             }//sw1
 
-        } while (chon1
-                <= 7);
+        }
 
     }//main
 }

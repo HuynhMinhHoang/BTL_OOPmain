@@ -42,7 +42,7 @@ public abstract class Account {
         return this.soDu += this.tinhTienLai();
     }
 
-    public int tinhNgay() {
+    public int tinhNgayGui() {
         int d1 = this.ngayTaoTK.get(Calendar.DAY_OF_YEAR);
         int d2 = new GregorianCalendar().get(Calendar.DAY_OF_YEAR);
         return (d2 - d1);

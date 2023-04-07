@@ -35,7 +35,7 @@ public class TaiKhoan extends Account {
 
     @Override
     public double tinhTienLai() {
-        return (this.soDu * 0.002 / 365 * this.tinhNgay());
+        return (this.soDu * 0.002 * this.tinhNgayGui()/365);
     }
 
     public boolean isKTDaoHan() {

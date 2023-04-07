@@ -238,4 +238,8 @@ public class KhachHang {
     public void setDsAC(List<Account> dsAC) {
         this.dsAC = dsAC;
     }
+
+    boolean isEmpty() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

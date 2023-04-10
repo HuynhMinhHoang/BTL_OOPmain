@@ -53,7 +53,7 @@ public enum KyHan {
     SAU_THANG {
         @Override
         public Calendar tinhDaoHan(Calendar dmy) {
-            dmy.add(Calendar.YEAR, 1);
+            dmy.add(Calendar.MONTH, 6);
             return dmy;
         }
 
@@ -68,7 +68,7 @@ public enum KyHan {
     MUOIHAI_THANG {
         @Override
         public Calendar tinhDaoHan(Calendar dmy) {
-            dmy.add(Calendar.YEAR, 2);
+            dmy.add(Calendar.YEAR, 1);
             return dmy;
         }
 

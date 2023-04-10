@@ -22,22 +22,22 @@ public class TaiKhoanCoKyHan extends Account {
 //        this.kyHan = kyHan;
 //        this.ngayDaoHan = this.kyHan.tinhDaoHan(new GregorianCalendar());
 //    }
+    
 
     public TaiKhoanCoKyHan(KyHan kyHan, double st) {
         super(st, "TAI KHOAN CO KY HAN");
-        this.ngayDaoHan = this.kyHan.tinhDaoHan(new GregorianCalendar());
         this.kyHan = kyHan;
+        this.ngayDaoHan = this.kyHan.tinhDaoHan(new GregorianCalendar());
+        
     }
-
-    
-
-    
-    
     @Override
     public double tinhTienLai() {
         return this.kyHan.tinhTienLai(this.soDu);
     }
 
+    
+
+    
     public boolean isKTDaoHan() {
         Calendar dmy = new GregorianCalendar();
         String d1 = DungChung.f.format(dmy.getTime());
@@ -76,12 +76,17 @@ public class TaiKhoanCoKyHan extends Account {
 //            super.withDrawMoney();
 //        }
 //    }
-    
+   
     @Override
     public void hienThiTK() {
         super.hienThiTK();
-        System.out.printf("Ky han = %s\n", this.kyHan);
+        System.out.printf("Ky han = %s\n", this.kyHan);   
+        System.out.printf("Ngay tao: %s\n", DungChung.f.format(this.ngayTaoTK.getTime()));
+        System.out.printf("Ngay dao han: %s\n", DungChung.f.format(this.ngayDaoHan.getTime()));
+   
     }
+    
+    
     
     
     

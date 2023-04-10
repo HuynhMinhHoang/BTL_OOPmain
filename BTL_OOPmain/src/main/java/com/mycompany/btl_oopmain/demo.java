@@ -5,6 +5,7 @@
 package com.mycompany.btl_oopmain;
 
 import java.text.ParseException;
+import java.time.Clock;
 
 /**
  *
@@ -15,7 +16,14 @@ public class demo {
     public static void main(String[] args) throws ParseException {
         boolean f = true;
         int chon1 = 0;
+        KhachHang kh1 = new KhachHang("hoang", "nam", "gl", "23233", "23/09/2001", 200000, "hoangou");
+        Account acc1 = new TaiKhoan(kh1.getSoTienGui());
+        Account acc2 = new TaiKhoanCoKyHan(KyHan.MOT_TUAN, 110000);
+        kh1.themAccount(acc1, acc2);
+        System.out.printf("*Password: %d\n", acc1.matKhau);
+        
         QuanLyKhachHang qkKH = new QuanLyKhachHang();
+        qkKH.themKH(kh1);
 
         while (f) {
             System.out.println("*********** MENU ***********");
@@ -102,6 +110,7 @@ public class demo {
                             if (kh != null) {
                                 System.out.println("\n==== THONG TIN DS TAI KHOAN CUA KHACH HANG THEO STK ====");
                                 kh.xuatAccount();
+//                                acc1.hienThiTK();
                             } else {
                                 System.out.println("Khong tim thay khach hang nao!");
                             }
@@ -141,25 +150,89 @@ public class demo {
                     int chon3;
                     do {
                         System.out.printf("\n=== MENU KHACH HANG ===\n*STK: %s\n*Ho & ten: %s\n", kh.getMaSoKH(), kh.getHoTen());
-                        System.out.print("1. Mo Tai Khoan Co Ky Han\n"
-                                + "2. Nop tien\n"
-                                + "3. Rut tien\n"
+                        System.out.print(""
+                                + "1. Mo Tai Khoan Co Ky Han\n"
+                                + "2. Nop tien vao TK Chinh\n"
+                                + "3. Rut tien TK Chinh\n"
                                 + "4. Rut tien TK co ky han\n"
                                 + "5. Doi mat khau\n"
-                                + "6. Thoat!\n"
+                                + "6. Dang xuat!\n"
                                 + "Ban chon?: ");
                         chon3 = DungChung.sc.nextInt();
 
                         switch (chon3) {
-                            case 6: {
+                            case 1: {
+                                double tiengui;
+                                do
+                                {
+                                    System.out.print("Nhap so tien muon gui (>=100000): ");
+                                    tiengui = DungChung.sc.nextDouble();
+                                }while(tiengui<100000);
+                                        
+                                double tienconlai = acc1.soDu - tiengui;
+                                acc1.soDu=tienconlai;
+                                if(tienconlai <  50000 || tiengui < 100000)
+                                {
+                                    System.out.print("Khong du tien de mo tai khoang co ki han!");                              
+                                } else {
+                                    System.out.println("    Chon ky han\n"
+                                            + "     1. 1 tuan \n"
+                                            + "     2. 1 thang \n"
+                                            + "     3. 6 thang \n"
+                                            + "     4. 1 nam");
+                                    int chonkyhan = DungChung.sc.nextInt();
+                                    Account acc;
+                                    switch (chonkyhan) {
+                                        case 1: {
+                                            acc = new TaiKhoanCoKyHan(KyHan.MOT_TUAN, tiengui);
+                                            kh.themAccount(acc);
+                                            System.out.println("=== THONG TIN TAI KHOAN VUA TAO ===");
+                                            acc.hienThiTK();
+                                        }
+                                        break;
+                                        case 2: {
+                                            acc = new TaiKhoanCoKyHan(KyHan.MOT_THANG, tiengui);
+                                            kh.themAccount(acc);
+                                            acc.hienThiTK();
+                                        }
+                                        break;
+
+                                        case 3: {
+                                            acc = new TaiKhoanCoKyHan(KyHan.SAU_THANG, tiengui);
+                                            kh.themAccount(acc);
+                                            acc.hienThiTK();
+                                        }
+                                        break;
+
+                                        case 4: {
+                                            acc = new TaiKhoanCoKyHan(KyHan.MUOIHAI_THANG, tiengui);
+                                            kh.themAccount(acc);
+                                            acc.hienThiTK();                                            
+                                        }
+                                        break;
+                                    }
+                                }
+                            break;
                             }
-                            
-                            
-                            
-                            
+                            case 2: {
+                                System.out.print("So tien muon nap vao TK Chinh: ");
+                                double tiennapTKC = DungChung.sc.nextDouble();
+                                acc1.nopTien(tiennapTKC);
+                                System.out.printf("So du TKChinh sau khi nap: %.0f\n", acc1.getSoDu() );                                
+                                acc1.getSoDu();
+                                
+                                break;
+                            }
+                            case 3: {
+                                
+                            }
+                            case 4: {
+                                
+                            }
+
                         }//sw3
                     } while (chon3 < 6);
-
+                    break;
                 }//cs6
                 case 7: {
                     System.out.println("Tam biet!");

@@ -17,6 +17,7 @@ import java.util.List;
  * @author Huỳnh Minh Hoàng
  */
 public class KhachHang {
+    protected List<Account> dsAC = new ArrayList<>();
     private static int dem = 1;
     private String maSoKH;
     private String hoTen;
@@ -27,7 +28,7 @@ public class KhachHang {
     private double soTienGui;
     
     private String username;
-    private List<Account> dsAC = new ArrayList<>();
+    
 
     {
         GregorianCalendar g = new GregorianCalendar();
@@ -37,7 +38,7 @@ public class KhachHang {
 
     public KhachHang() {
     }
-
+    
     public KhachHang(String hoTen, String gioiTinh, String queQuan, String CCCD, Date ngaySinh, double soTienGui, String username) {
         this.hoTen = hoTen;
         this.gioiTinh = gioiTinh;
@@ -69,7 +70,7 @@ public class KhachHang {
     public void nhapKH() throws ParseException{
         DungChung.sc.nextLine();
         System.out.print("Ho & ten: ");
-        this.hoTen = DungChung.sc.nextLine();;
+        this.hoTen = DungChung.sc.nextLine();
         System.out.print("Gioi tinh: ");
         this.gioiTinh = DungChung.sc.nextLine();
         System.out.print("Ngay sinh: ");
@@ -82,7 +83,7 @@ public class KhachHang {
         this.soTienGui = Double.parseDouble(DungChung.sc.nextLine());
         do {            
             if(soTienGui < 50000){
-                System.out.printf("Vui long nhap lai!: ");
+                System.out.printf("Vui5 long nhap lai!: ");
                 this.soTienGui = Double.parseDouble(DungChung.sc.nextLine());
             }
         } while (soTienGui < 50000);
@@ -93,10 +94,10 @@ public class KhachHang {
     public double soTienGui() {
         double tong = 0;
         for (Account ac : this.dsAC) {
-            soTienGui += ac.getSoDu();
+            tong += ac.getSoDu();
 
         }
-        return soTienGui;
+        return tong;
     }
     
     public void hienThiKH() {
@@ -106,7 +107,7 @@ public class KhachHang {
         System.out.printf("Que quan: %s\n", this.queQuan);
         System.out.printf("Ngay sinh: %s\n", DungChung.f.format(this.ngaySinh));
         System.out.printf("CCCD: %S\n", this.CCCD);
-        
+        System.out.printf("username: %S\n", this.username);
 //        System.out.printf("Username: %s\n", this.maSoKH);
     }
 

@@ -12,9 +12,18 @@ import java.util.GregorianCalendar;
  * @author Huỳnh Minh Hoàng
  */
 public class TaiKhoanCoKyHan extends Account {
-    private Calendar ngayDaoHan;
-    private KyHan kyHan;
 
+    private Calendar ngayDaoHan;
+    private static int dem = 1;
+    private KyHan kyHan;
+    private String STKcoKyHan;
+    private Account acc;
+
+    {
+        GregorianCalendar g = new GregorianCalendar();
+        setSTKcoKyHan(String.format("%04d%02d%02d%02d", dem++, g.get(Calendar.DAY_OF_MONTH), g.get(Calendar.MONTH) + 1,
+                g.get(Calendar.YEAR)));
+    }
 
 //    public TaiKhoanCoKyHan(KyHan kyHan, double st) {
 //        this.setSoDu(st);
@@ -22,76 +31,83 @@ public class TaiKhoanCoKyHan extends Account {
 //        this.kyHan = kyHan;
 //        this.ngayDaoHan = this.kyHan.tinhDaoHan(new GregorianCalendar());
 //    }
-    
-
     public TaiKhoanCoKyHan(KyHan kyHan, double st) {
         super(st, "TAI KHOAN CO KY HAN");
         this.kyHan = kyHan;
         this.ngayDaoHan = this.kyHan.tinhDaoHan(new GregorianCalendar());
-        
+
     }
+
     @Override
     public double tinhTienLai() {
-        return this.kyHan.tinhTienLai(this.soDu);
+        return this.getKyHan().tinhTienLai(this.soDu);
     }
 
-    
-
-    
     public boolean isKTDaoHan() {
         Calendar dmy = new GregorianCalendar();
         String d1 = DungChung.f.format(dmy.getTime());
-        String d2 = DungChung.f.format(this.ngayDaoHan.getTime());
+        String d2 = DungChung.f.format(this.getNgayDaoHan().getTime());
         return d1.equals(d2);
-        
     }
 
-//    @Override
-//    public void withDrawMoney(double money) {
-//        if (money <= this.getMoney()) {
-//            if (!isDueDate()) {
-//                System.out.println("Chưa đến hạn rút tiền! Gõ 1 để rút tiền gốc hoặc phím khác để không rút tiền:");
-//                int s = Static.sc.nextInt();
-//                if (s == 1) {
-//                    if (money == this.getMoney()) {
-//                        this.withDrawMoney();
-//                    } else {
-//                        this.term = KyHan.origin;
-//                        this.money = super.sumMoney();
-//                        super.withDrawMoney(money);
-//                    }
-//                }
-//            } else {
-//                this.money = super.sumMoney();
-//                super.withDrawMoney(money);
-//            }
-//        } else
-//            System.out.println("Số tiền lớn hơn số tiền hiện có trong tài khoản");
-//    }
-
-//    @Override
-//    public void withDrawMoney() {
-//        if (isDueDate()) {
-//            this.money = super.sumMoney();
-//            super.withDrawMoney();
-//        }
-//    }
-   
     @Override
     public void hienThiTK() {
         super.hienThiTK();
-        System.out.printf("Ky han = %s\n", this.kyHan);   
+        System.out.printf("Ky han = %s\n", this.getKyHan());
         System.out.printf("Ngay tao: %s\n", DungChung.f.format(this.ngayTaoTK.getTime()));
-        System.out.printf("Ngay dao han: %s\n", DungChung.f.format(this.ngayDaoHan.getTime()));
-   
+        System.out.printf("Ngay dao han: %s\n", DungChung.f.format(this.getNgayDaoHan().getTime()));
+        System.out.printf("So tai khoan: %s\n", this.getSTKcoKyHan());
     }
+
+    @Override
+    public void nopTien(double st, Account a) {
+        if (!isKTDaoHan()) {
+            System.out.println("Chua den ngay dao han de nop tien!");
+        } else {
+            if ((a.getSoDu() - st) > 50000 && st >= 100000) {
+                this.setSoDu(this.getSoDu() + st);
+                a.setSoDu(a.getSoDu() - st);
+                System.out.println("Nop tien thanh cong!");
+                System.out.printf("So du sau khi nop: %.0fVND\n", this.getSoDu());
+            } else {
+                System.out.println("So du khong du!");
+            }
+
+        }
+    }
+
+    @Override
+    public void rutTien(double st) {
+        if (!isKTDaoHan()) {
+            System.out.print("Chua den ngay dao han! Neu muon rut se nhan (lai mac dinh) chon Yes/No:");
+            DungChung.sc.nextLine();
+            String yn = DungChung.sc.nextLine();
+            if (yn.equals("Yes") || yn.equals("yes") || yn.equals("y")) {
+                super.rutTien();
+                System.out.println("Rut tien thanh cong!\n");
+            } else {
+                System.out.println("Rut tien khong thanh cong!n");
+            } //
+        }
+    }
+
+    @Override
+    public void rutTien() {
+        if (isKTDaoHan()) {
+            super.rutTien();
+            this.soDu = super.tongSoDu();
+        }
+    } 
     
     
     
     
     
     
-    //=============================================
+    
+    
+    
+    //==============================================
     /**
      * @return the ngayDaoHan
      */
@@ -107,6 +123,20 @@ public class TaiKhoanCoKyHan extends Account {
     }
 
     /**
+     * @return the dem
+     */
+    public static int getDem() {
+        return dem;
+    }
+
+    /**
+     * @param aDem the dem to set
+     */
+    public static void setDem(int aDem) {
+        dem = aDem;
+    }
+
+    /**
      * @return the kyHan
      */
     public KyHan getKyHan() {
@@ -119,6 +149,18 @@ public class TaiKhoanCoKyHan extends Account {
     public void setKyHan(KyHan kyHan) {
         this.kyHan = kyHan;
     }
-    
-    
+
+    /**
+     * @return the STKcoKyHan
+     */
+    public String getSTKcoKyHan() {
+        return STKcoKyHan;
+    }
+
+    /**
+     * @param STKcoKyHan the STKcoKyHan to set
+     */
+    public void setSTKcoKyHan(String STKcoKyHan) {
+        this.STKcoKyHan = STKcoKyHan;
+    }
 }

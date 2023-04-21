@@ -8,8 +8,7 @@ import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -37,7 +36,7 @@ public abstract class Account {
     
     
     public void hienThiTK() {
-        System.out.printf("Loai TK: %s\n", this.loaiTK);
+        System.out.printf("***Loai TK: %s\n", this.loaiTK);
         System.out.printf("So du: %.0f\n", this.soDu);
     }
     
@@ -46,7 +45,8 @@ public abstract class Account {
     public double tongSoDu() {
         return this.soDu += this.tinhTienLai();
     }
-
+    
+    
     public int tinhNgayGui() {
         int d1 = this.ngayTaoTK.get(Calendar.DAY_OF_YEAR);
         int d2 = new GregorianCalendar().get(Calendar.DAY_OF_YEAR);
@@ -54,6 +54,11 @@ public abstract class Account {
     }
 
     public void nopTien(double st) {
+        if (this.soDu >= 0)
+            this.soDu += st;
+    }
+    
+    public void nopTien(double st, Account a) {
         if (this.soDu >= 0)
             this.soDu += st;
     }
